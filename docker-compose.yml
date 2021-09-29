@@ -19,7 +19,7 @@ services:
         DB_NOMBRE: database
     
     curl-ajax-mysql: #Base de Datos
-      container_name: mysql
+      container_name: mysql-curl-ajax
       image: mysql:5.7
       restart: always
       ports:
