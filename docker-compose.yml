@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+    curl-ajax-web: #web
+      container_name: web
+      build: .
+      restart: always
+      ports:
+        - 8080:80
+      volumes:
+        - ./.:/var/www/html/
+      networks:
+        curl-ajax-network:
+          aliases: 
+            - curl-ajax-web
+      environment: 
+        DB_USUARIO: root
+        DB_PASSWORD: root
+        DB_IP: myq_database
+        DB_NOMBRE: database
+    
+    curl-ajax-mysql: #Base de Datos
+      container_name: mysql
+      image: mysql:5.7
+      restart: always
+      ports:
+        - 3306:3306
+      volumes:
+        - mysql:/var/lib/mysql
+      environment:
+        MYSQL_DATABASE: database
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
+        MYSQL_ROOT_PASSWORD: root
+      networks:
+        curl-ajax-network:
+          aliases: 
+            - curl-ajax-mysql
+      command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+volumes:
+  mysql:
+networks:
+  curl-ajax-network:
+    name: curl-ajax-net
+    driver: bridge
+    ipam:
+      driver: default
