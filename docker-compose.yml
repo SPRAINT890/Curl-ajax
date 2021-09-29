@@ -15,7 +15,7 @@ services:
       environment: 
         DB_USUARIO: root
         DB_PASSWORD: root
-        DB_IP: myq_database
+        DB_IP: curl-ajax-mysql
         DB_NOMBRE: database
     
     curl-ajax-mysql: #Base de Datos
@@ -27,7 +27,7 @@ services:
       volumes:
         - mysql:/var/lib/mysql
       environment:
-        MYSQL_DATABASE: database
+        MYSQL_DATABASE: pruebas_2021
         MYSQL_USER: admin
         MYSQL_PASSWORD: admin
         MYSQL_ROOT_PASSWORD: root
